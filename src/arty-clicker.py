@@ -62,9 +62,6 @@ def winEnumHandler(hwnd, ctx):
             print(hex(hwnd), win32gui.GetWindowText(hwnd))
             img = screenshot(hwnd)
             img = np.array(img)
-            # img = cv.cvtColor(img,cv.COLOR_RGBA2BGR)
-
-            # hsv = cv.cvtColor(img,cv.COLOR_BGR2HSV)
             lower_range = np.array([153, 15, 15])
             upper_range = np.array([255, 24, 25])
             mask = cv.inRange(img, lower_range, upper_range)
