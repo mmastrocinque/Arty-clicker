@@ -62,13 +62,14 @@ def winEnumHandler(hwnd, ctx):
             print(hex(hwnd), win32gui.GetWindowText(hwnd))
             img = screenshot(hwnd)
             img = np.array(img)
+            # RGB Ranges for biter base 'Red'
             lower_range = np.array([153, 15, 15])
             upper_range = np.array([255, 24, 25])
             mask = cv.inRange(img, lower_range, upper_range)
             kernel = np.ones((3, 3), np.uint8)
             mask_erode = cv.erode(mask, kernel, iterations=2)
             masked = cv.bitwise_and(img, img, mask=mask_erode)
-            contours, hierarchy = cv.findContours(
+            contours, _ = cv.findContours(
                 image=mask_erode, mode=cv.RETR_TREE, method=cv.CHAIN_APPROX_NONE)
 
             image_copy = masked.copy()
